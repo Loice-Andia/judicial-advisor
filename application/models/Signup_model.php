@@ -4,7 +4,7 @@ class Signup_model extends CI_Model
 	public function create_user(){
 
 		$data = array(
-			'username' => $this->input->post('username') ,
+			'surname' => $this->input->post('surname') ,
 			'other_names' => $this->input->post('other_names'),
 			'password' => md5($this->input->post('password')),
 			'phone_number' => $this->input->post('phone_number'),

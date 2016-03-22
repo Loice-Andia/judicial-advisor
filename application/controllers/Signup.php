@@ -7,15 +7,14 @@ class Signup extends CI_Controller
 {
 
 	public function index(){
-		$this->load->model('Admin_model');
-        $data['role'] = $this->Admin_model->get_roles();
-        $data['court_name'] = $this->Admin_model->get_courts();
-      //  echo("<pre>");
-
-       // print_r($this->Admin_model->get_roles()->result());
-       // echo("</pre>");
-
-        $this->load->view('signup',$data);
+		  $this->load->model('Admin_model');
+      $data['role'] = $this->Admin_model->get_roles();
+      $data['court_name'] = $this->Admin_model->get_courts();
+      
+      $this->load->view('includes/login_top');
+      $this->load->view('signup',$data);
+      $this->load->view('includes/footer');
+      
 	}
 
 	function add_user(){

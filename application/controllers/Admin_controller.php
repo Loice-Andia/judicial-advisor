@@ -5,6 +5,15 @@
 */
 class Admin_controller extends CI_Controller
 {
+	function admin_dashboard(){
+
+
+        $this->load->view('includes/header');
+        $this->load->view('includes/side_menu');
+        $this->load->view('admin_dashboard');
+        $this->load->view('includes/footer');
+    }
+
 	function get_user_with_id(){
 
 		$user_id = $_REQUEST['user_id'];

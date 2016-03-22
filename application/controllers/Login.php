@@ -26,46 +26,52 @@ class Login extends CI_Controller
     }
 
 	function hello(){
-    $this->form_validation->set_rules('username', 'Username', 'trim|required');
+
+    $this->form_validation->set_rules('email', 'Email', 'trim|required');
           $this->form_validation->set_rules('password', 'Password', 'trim|required');
           if($this->form_validation->run() == FALSE)
           {
                //Field validation failed.  User redirected to login page
-               $this->load->view('login');
+              $this->load->view('includes/login_top');
+              $this->load->view('login');
+              $this->load->view('includes/footer');
           }
           else
           {
-            $username = $this->input->post('username');
+            $email = $this->input->post('email');
             $password = $this->__encrip_password($this->input->post('password'));
-            $result = $this->Login_model->get_user($username, $password);
+            $result = $this->Login_model->get_user($email, $password);
             if(!empty($result))
             {
               $user_id = $result[0]['user_id'];
+              $surname = $result[0]['surname'];
               $other_names = $result[0]['other_names'];
               $court_id = $result[0]['court_id'];
               $role_id = $result[0]['role_id'];
 
+
               $data = array(
                 'user_id' => $user_id,
-                'username' => $username,
+                'surname' => $surname,
                 'is_logged_in' => true,
-                'role' => $role_id,
+                'role_id' => $role_id,
                 'court_id' => $court_id,
                 'other_names'=>$other_names
             );
+              
             $this->session->set_userdata($data);
+
             if ($role_id == 1) {
-              $this->load->view('judge_dashboard');
-            } else {
-              if ($role_id == 2) {
-                $this->load->view('clerk_dashboard');
+              redirect(base_url().'index.php/judge_controller/judge_dashboard');
+            } else if($role_id == 2){
+              redirect(base_url().'index.php/Clerk_controller/index');
               } else {
-                $this->load->view('admin_dashboard');
+                redirect(base_url().'index.php/admin_controller/admin_dashboard');
               }
               
             }
             
-            }
+            
           else
           {
                redirect(base_url());

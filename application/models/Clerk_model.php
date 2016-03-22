@@ -31,16 +31,16 @@ class Clerk_model extends CI_Model
 
     function get_case_codes($court_rank_id){
 
-        $this->db->where('court_rank_id',$court_rank_id)
+        $this->db->where('court_rank_id',$court_rank_id);
 
-        $query=$this->db->get('role');
+        $query=$this->db->get('case_codes');
         return $query;
 
     }
 
     function get_case_type($case_code){
 
-        $this->db->where('case_code',$case_code)
+        $this->db->where('case_code',$case_code);
 
         $query=$this->db->get('case_type');
         return $query;
@@ -67,21 +67,22 @@ class Clerk_model extends CI_Model
 			'witnesses' => $this->input->post('witnesses'),  
 			);
 
-		$query = $this->db->insert('case_information', $new_case_info)
+		$query = $this->db->insert('case_information', $new_case_info);
+		return $query;
 	}
 
 	public function get_case_details(){
 
-		$query=$this->db->get->('case_details');
+		$query=$this->db->get('case_details');
 		return $query;
 
 	}
 
-	public function get_courts($court_id){
+	public function get_court_per_id($court_id){
 
 		$this->db->where('court_id', $court_id);
 
-		$query=$this->db->get->('court_names');
+		$query=$this->db->get('court_names');
 		return $query;
 
 	}

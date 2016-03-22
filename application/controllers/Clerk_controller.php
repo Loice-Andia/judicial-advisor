@@ -1,20 +1,52 @@
 <?php
 
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /**
 * 
 */
-class Clerk_Controller extends CI_Controller
+class Clerk_controller extends CI_Controller
 {
-	function add_case_view(){
 
+	
+   public function index()
+    {
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+        $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->model('Clerk_model');
         $this->load->model('Admin_model');
-        $court_rank_id =_REQUEST['court_rank_id'];
-        $data['case_code'] = $this->Clerk_model->get_case_codes($court_rank_id);
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('clerk_dashboard');
+        $this->load->view('includes/footer');
+    }
+    
+    function add_case_view(){
+
+        //$court_rank_id =_REQUEST['court_rank_id'];
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+        $this->load->model('Clerk_model');
+        $this->load->model('Admin_model');
+        
         $data['outcome'] = $this->Clerk_model->get_outcome();
         $data['legalrep'] = $this->Clerk_model->get_legalrep();
         $data['judicial_officers'] = $this->Clerk_model->get_judicial_officers();
-        $this->load->view('add_case',$data);
+        
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('add_case', $data);
+        $this->load->view('includes/footer');
     }
 
     public function add_case(){
