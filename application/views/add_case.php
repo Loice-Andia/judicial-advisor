@@ -19,8 +19,8 @@
 						</ul>
 					</div>
 					</div>
-<!-- 2 columns form -->
-					<form class="form-horizontal" action="#">
+<!-- 2 columns form --> 
+					<form class="form-horizontal" action="add_case" method="POST">
 						<div class="panel panel-flat">
 							<div class="panel-heading">
 								
@@ -40,138 +40,119 @@
 											<legend class="text-semibold"><i class="icon-reading position-left"></i> Case details</legend>
 
 											<div class="form-group">
-												<label class="col-lg-3 control-label">Enter your name:</label>
+												<label class="col-lg-3 control-label">Court name:</label>
 												<div class="col-lg-9">
-													<input type="text" class="form-control" placeholder="Eugene Kopyov">
+													<input type="text" name="court_name" disabled="true" class="form-control" placeholder="e.g. Busia High Court" value="<?php foreach($court_name->result() as $row) {
+														echo $row->court_name ;
+														}
+														?>">
+												</div>
+											</div>
+
+											
+
+											<div class="form-group">
+												<label class="col-lg-3 control-label">case code:</label>
+												<div class="col-lg-4">
+												<select name="case_code" id="case_code" class="select" placeholder="Choose Case Code" required="" value="<?php echo set_value('case_code'); ?>">
+												<?php 
+												echo "<option >Choose Case code</option>";
+												?>
+												<?php
+												foreach ($case_code->result() as $row) {
+													echo "<option value='$row->case_code'> $row->case_code </option>";
+													}
+													?>
+												</select>
+
+												</div>
+												<div class="col-lg-5">
+												<input name="case_number" id="case_number" class="form-control" placeholder="case number" required="">
+
+												</div>
+											</div>
+
+											
+											<div class="form-group">
+												<label class="col-lg-3 control-label">case type:</label>
+												<div class="col-lg-9">
+												<input type="text" name="case_type" placeholder="case type" class="form-control">
 												</div>
 											</div>
 
 											<div class="form-group">
-												<label class="col-lg-3 control-label">Enter your password:</label>
+												<label class="col-lg-3 control-label">Date filed:</label>
 												<div class="col-lg-9">
-													<input type="password" class="form-control" placeholder="Your strong password">
+													<input type="date" name="date_filed" class="form-control" placeholder="Date Filed">
 												</div>
 											</div>
 
 											<div class="form-group">
-												<label class="col-lg-3 control-label">Select your state:</label>
+												<label class="col-lg-3 control-label">Original Case Details:</label>
 												<div class="col-lg-9">
-													<select data-placeholder="Select your state" class="select">
-														<option></option>
-														<optgroup label="Alaskan/Hawaiian Time Zone">
-															<option value="AK">Alaska</option>
-															<option value="HI">Hawaii</option>
-														</optgroup>
-														<optgroup label="Pacific Time Zone">
-															<option value="CA">California</option>
-															<option value="NV">Nevada</option>
-															<option value="WA">Washington</option>
-														</optgroup>
-														<optgroup label="Mountain Time Zone">
-															<option value="AZ">Arizona</option>
-															<option value="CO">Colorado</option>
-															<option value="WY">Wyoming</option>
-														</optgroup>
-														<optgroup label="Central Time Zone">
-															<option value="AL">Alabama</option>
-															<option value="AR">Arkansas</option>
-															<option value="KY">Kentucky</option>
-														</optgroup>
-														<optgroup label="Eastern Time Zone">
-															<option value="CT">Connecticut</option>
-															<option value="DE">Delaware</option>
-															<option value="WV">West Virginia</option>
-														</optgroup>
-													</select>
-												</div>
-											</div>
+													<div class="row">
+														<div class="col-md-6">
+															<input type="number" name="origcasenum_appeal" placeholder="Original case num" class="form-control">
+														</div>
 
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Attach screenshot:</label>
-												<div class="col-lg-9">
-													<input type="file" class="file-styled">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Your message:</label>
-												<div class="col-lg-9">
-													<textarea rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+														<div class="col-md-6">
+															<input type="text" name="origcourt_appeal" placeholder="Original Court" class="form-control">
+														</div>
+													</div>
 												</div>
 											</div>
 										</fieldset>
+
+										
 									</div>
 
 									<div class="col-md-6">
+									<fieldset>
+						                	<legend class="text-semibold"><i class="icon-reading position-left"></i> Case Parties</legend>
+
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Plaintiff:</label>
+												<div class="col-lg-9">
+													<input type="text" name="plaintiffs" class="form-control" placeholder="Plaintiffs name">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Defendant:</label>
+												<div class="col-lg-9">
+													<input type="text" name="defendants" class="form-control" placeholder="defendants name">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Judicial Officer:</label>
+												<div class="col-lg-9">
+													<input type="date" name="judicial_officer_id" class="form-control" placeholder="Date Filed">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-lg-3 control-label">Legal Rep:</label>
+												<div class="col-lg-9">
+													<input type="date" name="legalrep_id" class="form-control" placeholder="Date Filed">
+												</div>
+											</div>
+
+											
+										</fieldset>
+									</div>
+									<div class="col-md-12">
+
 										<fieldset>
-						                	<legend class="text-semibold"><i class="icon-reading position-left"></i> Case Information</legend>
+						                	<legend class="text-semibold"><i class="icon-reading position-left"></i> Case Information</legend>				
 
 											<div class="form-group">
-												<label class="col-lg-3 control-label">Your name:</label>
-												<div class="col-lg-9">
-													<div class="row">
-														<div class="col-md-6">
-															<input type="text" placeholder="First name" class="form-control">
-														</div>
+												<label class="col-lg-1 control-label">Summary of the Info:</label>
+												<div class="col-lg-11">
+													<textarea rows="5" cols="5" name="case_details" required="" class="form-control" placeholder="Enter the summary of the case here"></textarea>
 
-														<div class="col-md-6">
-															<input type="text" placeholder="Last name" class="form-control">
-														</div>
-													</div>
 												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Email:</label>
+												<label class="col-lg-1 control-label">Attach a file:</label>
 												<div class="col-lg-9">
-													<input type="text" placeholder="eugene@kopyov.com" class="form-control">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Phone #:</label>
-												<div class="col-lg-9">
-													<input type="text" placeholder="+99-99-9999-9999" class="form-control">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Location:</label>
-												<div class="col-lg-9">
-													<div class="row">
-														<div class="col-md-6">
-															<div class="mb-15">
-									                            <select data-placeholder="Select your country" class="select">
-									                            	<option></option>
-									                                <option value="1">Canada</option> 
-									                                <option value="2">USA</option> 
-									                                <option value="3">Australia</option> 
-									                                <option value="4">Germany</option> 
-									                            </select>
-								                            </div>
-
-								                            <input type="text" placeholder="ZIP code" class="form-control">
-														</div>
-
-														<div class="col-md-6">
-															<input type="text" placeholder="State/Province" class="form-control mb-15">
-															<input type="text" placeholder="City" class="form-control">
-														</div>
-													</div>
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Address:</label>
-												<div class="col-lg-9">
-													<input type="text" placeholder="Your address of living" class="form-control">
-												</div>
-											</div>
-
-											<div class="form-group">
-												<label class="col-lg-3 control-label">Additional message:</label>
-												<div class="col-lg-9">
-													<textarea rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+												<input type="file" class="file-styled">
+												
 												</div>
 											</div>
 										</fieldset>

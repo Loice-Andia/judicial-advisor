@@ -9,7 +9,7 @@ class Clerk_controller extends CI_Controller
 {
 
 	
-   public function index()
+    public function index()
     {
         $court_id = $this->session->userdata('court_id');
         $role_id = $this->session->userdata('role_id');
@@ -35,12 +35,13 @@ class Clerk_controller extends CI_Controller
         $this->load->model('Clerk_model');
         $this->load->model('Admin_model');
         
-        $data['outcome'] = $this->Clerk_model->get_outcome();
         $data['legalrep'] = $this->Clerk_model->get_legalrep();
         $data['judicial_officers'] = $this->Clerk_model->get_judicial_officers();
+        $data['case_code'] = $this->Clerk_model->get_case_codes();
         
         $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
         $data['role'] = $this->Admin_model->get_user_role($role_id);
+
 
         $this->load->view('includes/header',$data);
 
@@ -52,15 +53,24 @@ class Clerk_controller extends CI_Controller
     public function add_case(){
 
 		$this->load->model('Clerk_model');
-        $query = $this->Clerk_model->add_case_details();
-        if ($query == true) {
+        $query1 = $this->Clerk_model->add_case_details();
+        $query2 = $this->Clerk_model->add_case_info();
+        if (($query1 == true) && ($query2 == true)) {
             $this->session->set_flashdata('success', 'Case Record Added Successfully');
-            redirect('', 'refresh');
-        } else if ($query == false) {
+            redirect('clerk_controller/index', 'refresh');
+        } else {
             $this->session->set_flashdata('error', 'Case Record Not Added');
             redirect('', 'refresh');
         }
 	}
+
+    public function get_case_type(){
+
+        $this->load->model('Clerk_model');
+        $data['role'] = $this->Clerk_model->get_case_type($case_code);
+       
+
+    }
 	
 	public function get_case_per_casenum(){
 

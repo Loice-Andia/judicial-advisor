@@ -62,7 +62,7 @@ class Login extends CI_Controller
             $this->session->set_userdata($data);
 
             if ($role_id == 1) {
-              redirect(base_url().'index.php/judge_controller/judge_dashboard');
+              redirect(base_url().'index.php/judge_controller/index');
             } else if($role_id == 2){
               redirect(base_url().'index.php/Clerk_controller/index');
               } else {
