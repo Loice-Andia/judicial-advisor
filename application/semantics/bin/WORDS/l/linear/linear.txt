@@ -1,0 +1,1 @@
+linear nonlinear polynomial logistic regression non-linear quadratic exponential log-linear gaussian multivariate least-squares logarithmic regressions poisson fitted fitting cox fit circular sigmoidal

@@ -1,0 +1,1 @@
+kurtosis skewness shapiro-wilk normality swallows kolmogorov-smirnov kolmogorov–smirnov f-tests k-s k–s omnibus post-chip intra-assay lisa non-uniformity log-transformation kt small-area bioirrigation proportionality heteroscedasticity

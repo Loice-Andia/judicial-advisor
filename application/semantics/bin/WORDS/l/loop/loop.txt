@@ -1,0 +1,1 @@
+loop loops helix residue hairpin bulge helices linker residues strands bond stem–loop segment backbone stacking nucleotides α-helix hydrophobic duplex pocket conformation

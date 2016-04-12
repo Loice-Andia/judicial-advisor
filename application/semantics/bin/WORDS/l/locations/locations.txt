@@ -1,0 +1,1 @@
+locations location positions coordinates regions boundaries position areas proximity distances direction addresses localizations sizes points environments map contexts localities parts mapping

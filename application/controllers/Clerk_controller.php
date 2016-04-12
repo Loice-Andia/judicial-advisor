@@ -64,23 +64,45 @@ class Clerk_controller extends CI_Controller
         }
 	}
 
-    public function get_case_type(){
+    public function search_case(){
 
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+        $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->model('Clerk_model');
-        $data['role'] = $this->Clerk_model->get_case_type($case_code);
+        $this->load->model('Admin_model');
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('search_case');
+        $this->load->view('includes/footer');
        
 
     }
 	
-	public function get_case_per_casenum(){
+	public function get_case_details_per_casenum(){
 
-		$case_num = $_REQUEST['case_num'];
-		$court_id = $_REQUEST['court_id'];
+        $case_num=$_REQUEST['case_num'];
+
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+        $this->load->helper('form');
+        $this->load->helper('url');
         $this->load->model('Clerk_model');
-        $data['edit_case_details'] = $this->Clerk_model->get_case($case_num);
-        $data['court_names'] = $this->Clerk_model->get_courts($court_id);
-        $data['main_content'] = '';
-        $this->load->view('', $data);
+        $this->load->model('Admin_model');
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['case_info'] = $this->Clerk_model->get_case_info($case_num);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('view_case_details',$data);
+        $this->load->view('includes/footer');
 	}
 
 	public function update_case(){

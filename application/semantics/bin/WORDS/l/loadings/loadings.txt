@@ -1,0 +1,1 @@
+loadings eigenvalues coefficients variances loading covariance residuals deviations eigenvalue fleet iccs weights correlations eigenvectors phosphorus catchment variance magnitudes sum loads srms

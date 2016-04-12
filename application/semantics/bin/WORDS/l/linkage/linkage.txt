@@ -1,0 +1,1 @@
+linkage ld qtl lod linkages haplotype map qtls disequilibrium mapping multipoint association cm clustering haplotypes maps microsatellite loci hardy-weinberg epistasis bond

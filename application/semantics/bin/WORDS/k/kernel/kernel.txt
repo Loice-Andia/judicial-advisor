@@ -1,0 +1,1 @@
+kernel kernels gaussian svm polynomial classifier parameter rbf fitting smoothing quadratic weighting rfe classifiers knn svms bayes kigp fit lowess width

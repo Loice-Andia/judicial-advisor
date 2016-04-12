@@ -1,0 +1,1 @@
+loess lowess spline qspline print-tip normalization quantile polynomial smoothing least-square least-squares log-linear splines cosine sigmoidal gam log-ratio non-linear gaussian rma penalized

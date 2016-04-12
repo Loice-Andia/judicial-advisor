@@ -1,0 +1,1 @@
+lines line rectangles arrows bars boxes circles ovals dotted rectangle arrow dashed triangles shading bar dots diamonds spheres edges horizontal squares

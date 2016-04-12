@@ -1,0 +1,1 @@
+linearity normality hardy-weinberg hwe homogeneity hardy–weinberg additivity reproducibility independence neutrality stationarity repeatability independency uniformity randomness proportionality sphericity monotonicity consistency reliability correctness

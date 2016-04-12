@@ -1,0 +1,1 @@
+kernels kernel polynomial svms svm rbf gaussian fitting splines classifier rfe classifiers fwhm fit functions silks distributions convolution parameter function hyperplane

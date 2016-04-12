@@ -56,6 +56,7 @@
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li class=""><a href="<?php echo base_url();?>index.php/clerk_controller/index">  <i class="icon-home4"></i> <span>Dashboard</span></a></li>
 								<?php if($this->session->userdata('role_id') == '2'){
+									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Search a case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Add a New Case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>View a Case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";

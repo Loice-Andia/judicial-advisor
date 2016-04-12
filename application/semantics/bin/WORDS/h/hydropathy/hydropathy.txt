@@ -1,0 +1,1 @@
+hydropathy hydrophobicity log-log hydrophilicity volcano q-q lipophilicity funnel compactness scree bland-altman skyline contour gc-skew rt-t-rflp co-locations schild spreuk eapiq mfe t-rflp
