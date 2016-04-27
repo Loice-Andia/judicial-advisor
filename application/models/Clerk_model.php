@@ -51,7 +51,7 @@ class Clerk_model extends CI_Model
 
         $this->db->where('case_code',$case_code);
 
-        $query=$this->db->get('cse_type');
+        $query=$this->db->get('case_type');
         return $query;
 
     }

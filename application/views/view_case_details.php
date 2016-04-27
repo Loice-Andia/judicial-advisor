@@ -1,7 +1,13 @@
 <div class="page-header">
 	<div class="page-header-content">
 		<div class="page-title">
-				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Clerk Dashboard - Add Case</h4>
+				<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - <?php if ($this->session->userdata('role_id') == '1') {
+                    						echo " &nbsp Judge";
+                							} else if ($this->session->userdata('role_id') == '2') {
+                    						echo "</br>  &nbsp;Court Clerk";
+                							} else {
+                							echo "Admin";
+                							} ?> Dashboard - Case Information</h4>
 		</div>
 
 	<div class="heading-elements">
@@ -27,6 +33,7 @@
 
 						$plaintiffs = $_REQUEST['plaintiffs'];
 						$defendants = $_REQUEST['defendants'];
+						$case_num = $_REQUEST['case_num'];
        
         foreach ($case_info->result() as $row) {
             ?>
@@ -34,7 +41,11 @@
 					<!-- Autocomplete type -->
 					<div class="panel panel-flat">
 						<div class="panel-heading">
-							<h5 class="panel-title">Case Information : <?php echo " Case of ".$plaintiffs ." vs ". $defendants;?></h5>
+							<h5 class="panel-title">
+							<strong>CASE INFORMATION</strong> </br> 
+							Case Num : <?php echo $case_num; ?></br>
+							<?php echo " Case of ".$plaintiffs ." vs ". $defendants;?>
+							</h5>
 							<div class="heading-elements">
 								<ul class="icons-list">
 			                		<li><a data-action="collapse"></a></li>
@@ -45,14 +56,17 @@
 						</div>
 
 						<div class="panel-body">
-						
+							
 							<div class="content-group-lg">
+							<div class="hot-container">
+									<div id="hot_ac_lazy"></div>
+								</div>
 								<h6 class="text-semibold">Summary of case</h6>
 								<p class="content-group">
 								<?php
-                    echo $case_details = $row->case_details;
+                    			echo $case_details = $row->case_details;
                    
-                    ?></p>
+                    			?></p>
 
 								<div class="hot-container">
 									<div id="hot_ac_lazy"></div>
@@ -62,9 +76,9 @@
 							<div class="content-group-lg">
 								<h6 class="text-semibold">Evidence</h6>
 								<p class="content-group"><?php
-                    echo $evidence = $row->evidence;
+                    			echo $evidence = $row->evidence;
                    
-                    ?></p>
+                    			?></p>
 
 								<div class="hot-container">
 									<div id="hot_ac_strict"></div>
@@ -74,15 +88,23 @@
 							<div>
 								<h6 class="text-semibold">Witnesses</h6>
 								<p class="content-group"><?php
-                    echo $witnesses = $row->witnesses;
+                    			echo $witnesses = $row->witnesses;
                    
-                    ?></p>
-
-								<div class="hot-container">
-									<div id="hot_ac_ajax"></div>
+                    			?></p>
+                    			<div class="hot-container">
+								<div id="hot_ac_lazy"></div>
 								</div>
 							</div>
 							<?php } ?>
+						</div>
+						<div class="row">
+								<div class="col-md-6 text-left">								
+									<a href="<?php echo base_url();?>index.php/judge_controller/view_cases"> <i class="icon-arrow-left15 position-left"></i>Case List </a>
+								</div>
+								<div class="col-md-6 text-right">
+								
+									<a href="<?php echo base_url();?>index.php/judge_controller/similarity?case_num=<?php echo $case_num; ?>&plaintiffs=<?php echo $plaintiffs; ?>&defendants=<?php echo $defendants; ?>"> Case Judgement <i class="icon-arrow-right15 position-right"></i></a>
+								</div>
 						</div>
 					</div>
 					<!-- /autocomplete type -->

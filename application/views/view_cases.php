@@ -85,8 +85,8 @@ s<div class="page-header">
 													</a>
 
 													<ul class="dropdown-menu dropdown-menu-right">
-														<li><a href="<?php echo base_url();?>index.php/clerk_controller/get_case_details_per_casenum?case_num=<?php echo $row->case_num; ?>&plaintiffs=<?php echo $row->plaintiffs; ?>&defendants=<?php echo $row->defendants; ?>"> Case Information</a></li>Case Judgement</a></li>
-														<li><a href="<?php echo base_url();?>index.php/judge_controller/similarity?case_num=<?php echo $row->case_num; ?>&plaintiffs=<?php echo $row->plaintiffs; ?>&defendants=<?php echo $row->defendants; ?>"><i class="icon-file-word"></i> Export to .doc</a></li>
+														<li><a href="<?php echo base_url();?>index.php/clerk_controller/get_case_details_per_casenum?case_num=<?php echo $row->case_num; ?>&plaintiffs=<?php echo $row->plaintiffs; ?>&defendants=<?php echo $row->defendants; ?>"> Case Information</a></li>
+														<li><a href="<?php echo base_url();?>index.php/judge_controller/similarity?case_num=<?php echo $row->case_num; ?>&plaintiffs=<?php echo $row->plaintiffs; ?>&defendants=<?php echo $row->defendants; ?>">Case Judgement</a></li>
 													</ul>
 												</li>
 											</ul>

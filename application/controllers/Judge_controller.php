@@ -49,60 +49,63 @@ class Judge_controller extends CI_Controller
     
     public function similarity()
     {
-        $channel=$this->input->post("channel");
-        $question=$this->input->post("question");
+        $plaintiffs = $_REQUEST['plaintiffs'];
+        $defendants = $_REQUEST['defendants'];
+        $case_num = $_REQUEST['case_num'];
 
-        if(empty($case_details) || (strlen($case_details)<15))
+        $this->load->model('Clerk_model');
+        $this->load->model('Admin_model');
+        $this->load->model('Judge_model');
+
+        $case_details = $this->Clerk_model->get_case_info($case_num);
+
+
+        if(empty($case_details) || (strlen($case_details)<30))
         {
             //question is empty or length of characters less than 15
             $return_array=array(
                 "status"=>"error",
-                "payload"=>"question is too short or empty"
+                "payload"=>"details is too short or empty"
             );
         }
         else
         {
 
             //pre process question
-            $question=pre_process_case_details($case_details);
+            $case_details=pre_process_case_details($case_details);
+            $case_match = $this->Judge_model->get_case_judgement($case_details);
 
             //get exact match
-
-            $this->load->model("question_model");
-            $question_match=$this->question_model->get_exact_question_match($question);
-
-            if($question_match!==-1)
+            if($case_match !==-1)
             {
                 //exact match found!
                 //get answer of exact match
-                $this->load->model("answer_model");
-
-                $answer=$this->answer_model->get_answer_from_question_id($question_match->question_id);
-                if($answer!==-1)
+                $judgement=$case_match;
+                if($judgement!=-1)
                 {
                     //answer present
                     $return_array=array(
                         "status"=>"ok",
                         "payload"=>"exact match was found.",
-                        "answer"=>$answer->answer
+                        "answer"=>$judgement
                     );
                 }
                 else
                 {
                     //answer not present, thus get next best match
-                    $question_best_match=$this->question_model->get_best_question_match($question);
-                    if($question_best_match!=-1)
+                    $case_best_match=$this->Judge_model->get_best_case_match($case_details);
+                    if($case_best_match!=-1)
                     {
                         //suitable best match found
                         //get answer of best match
-                        $answer=$this->answer_model->get_answer_from_question_id($question_best_match);
-                        if($answer!=-1)
+                        $judgement=$this->Judge_model->get_judgement($case_num);
+                        if($judgement!=-1)
                         {
                             //answer present
                             $return_array=array(
                                 "status"=>"ok",
                                 "payload"=>"best match was found.",
-                                "answer"=>$answer->answer
+                                "answer"=>$judgement
                             );
                         }
                         else
@@ -131,21 +134,20 @@ class Judge_controller extends CI_Controller
             {
                 //get best match
                 //echo($question);
-                $question_best_match=$this->question_model->get_best_question_match($question);
-                if($question_best_match!=-1)
+                $case_best_match=$this->Judge_model->get_best_case_match($case_details);
+                if($case_best_match!=-1)
                 {
                     //suitable best match found
                     //get answer of best match
-                    $this->load->model("answer_model");
-
-                    $answer=$this->answer_model->get_answer_from_question_id($question_best_match);
-                    if($answer!==-1)
+                    
+                    $judgement=$this->Judge_model->get_judgement($case_num);;
+                    if($judgement!==-1)
                     {
                         //answer present
                         $return_array=array(
                             "status"=>"ok",
                             "payload"=>"best match was found.",
-                            "answer"=>$answer->answer
+                            "answer"=>$judgement
                         );
                     }
                     else
