@@ -118,9 +118,9 @@ class Clerk_model extends CI_Model
 	public function search_case(){
 
 		$searchvalue = $this->input->post('search_case');
-		$this->db->where('case_num', $searchvalue);
-		$this->db->or_where('plaintiffs', $searchvalue);
-		$this->db->or_where('defendants', $searchvalue);
+		$this->db->like('case_num', $searchvalue);
+		$this->db->or_like('plaintiffs', $searchvalue);
+		$this->db->or_like('defendants', $searchvalue);
 
         $query = $this->db->get('case_details');
 

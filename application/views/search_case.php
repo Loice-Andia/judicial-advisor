@@ -1,7 +1,7 @@
 <div class="page-header">
 					<div class="page-header-content">
 						<div class="page-title">
-							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Clerk Dashboard - Search Case</h4>
+							<h4><i class="icon-arrow-left52 position-left"></i> <span class="text-semibold">Home</span> - Search Case</h4>
 						</div>
 
 						<div class="heading-elements">
@@ -36,7 +36,7 @@
 						</div>
 
 						<div class="panel-body">
-							<form action="get_case_per_casenum" class="main-search" method="POST">
+							<form action="search_results" class="main-search" method="POST">
 								<div class="input-group content-group">
 									<div class="has-feedback has-feedback-left">
 										<input type="text" class="form-control input-xlg" name="search_case" placeholder=" use case number, name or Legal rep ">
