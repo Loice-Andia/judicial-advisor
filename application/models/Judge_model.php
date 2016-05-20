@@ -53,6 +53,24 @@ class Judge_model extends CI_Model
         }
 	}
 
+  public function get_best_judgement($case_best_match){
+    echo($case_best_match);
+
+    $this->db->where('case_num',$case_best_match);
+    $query = $this->db->get('judgements');
+    if ($query->num_rows() == 1) 
+          {
+            
+            return $query->row()->judgement;
+          }
+          else
+          {
+           
+            return -1;
+        }
+  }
+
+
 
 
 	public function get_best_case_match($case_details){
@@ -73,27 +91,28 @@ class Judge_model extends CI_Model
                 $res_case_details=$res->case_details;
                 $res_case_num=$res->case_num;
 
-
-                $res_case_details=pre_process_question($res_case_details);
+                $res_case_details=pre_process_case_details($res_case_details);
                 $temp_similarity=get_similarity($case_details,$res_case_details);
-                similar_text($case_details,$res_case_details,$percentage);
+                //similar_text($case_details,$res_case_details,$percentage);
                 //$temp_similarity=$temp_similarity+($percentage/100);
-                if($temp_similarity>$similarity)
+                if(($temp_similarity>$similarity)&&($temp_similarity<1.0))
                 {
                     $similarity=$temp_similarity;
                     $case_num=$res_case_num;
                 }
+                
             }
 
             if($similarity>=SEMANTIC_SIMILARITY_SCORE)
             {
                 //return question_id
                 //todo add question to new questions with suggested answers
+              
                 return $case_num;
             }
             else
             {
-               // echo($similarity);
+               
                 return -1;
             }
 
@@ -105,7 +124,14 @@ class Judge_model extends CI_Model
 
 	}
 	
-	function analyse_case($case_num){
+	public function update_judgement($case_num){
+    $data = array(
+      'judgement' => $this->input->post('judgement') ,
+      );
+     $this->db->where('case_num', $case_num);
+
+    $query = $this->db->update('judgements', $data);
+        return $query;
 
 	}
 

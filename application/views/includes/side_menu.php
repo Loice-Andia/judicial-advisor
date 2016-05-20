@@ -12,7 +12,7 @@
 					<div class="sidebar-user">
 						<div class="category-content">
 							<div class="media">
-								<a href="#" class="media-left"><img src="<?php echo base_url();?>assets/images/demo/users/face11.jpg" class="img-circle img-sm" alt=""></a>
+								<a href="#" class="media-left"><img src="<?php echo base_url();?>assets/images/demo/users/face15.jpg" class="img-circle img-sm" alt=""></a>
 								<div class="media-body">
 									<span class="media-heading text-semibold" ><?php echo($this->session->userdata('surname').' '.$this->session->userdata('other_names'));?></span>
 									<div class="text-size-mini text-muted">
@@ -58,22 +58,20 @@
 								<?php if($this->session->userdata('role_id') == '2'){
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Search a case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Add a New Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>View a Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/judge_controller/view_cases"."><i class='icon-pencil3'></i> <span>View Recent Cases</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
 								} elseif ($this->session->userdata('role_id') == '1') {
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Search a case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/judge_controller/view_cases"."><i class='icon-pencil3'></i> <span>View recent Cases</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
 								} else {
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Users</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/admin_controller/view_users"."><i class='icon-pencil3'></i> <span>Users</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Courts</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Case codes</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Outcomes</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Judicial Officers</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Legal Reps</span></a></li>";
-								
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-copy'></i> <span>Reports</span></a></li>";
 								}
 									 ?>

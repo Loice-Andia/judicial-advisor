@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
+defined('SEMANTIC_SIMILARITY_SCORE') OR define('SEMANTIC_SIMILARITY_SCORE', 0.5);
 
 /*
 |--------------------------------------------------------------------------

@@ -98,7 +98,7 @@ if (empty($surname) || empty($role_id)) {
 
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
-						<img src="<?php echo base_url();?>assets/images/demo/users/face11.jpg" alt="">
+						<img src="<?php echo base_url();?>assets/images/demo/users/face15.jpg" alt="">
 						<span><?php echo($surname.' '. $other_names); 
 						
                 ?>

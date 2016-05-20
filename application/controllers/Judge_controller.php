@@ -46,20 +46,82 @@ class Judge_controller extends CI_Controller
         $this->load->view('includes/footer');
 		
 	}
-    
+    public function view_judgment(){
+
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+
+        $this->load->helper('form');
+        $this->load->helper('url');
+
+        $this->load->model('Clerk_model');
+        $this->load->model('Admin_model');
+
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $data['judgement'] = $this->similarity();
+       
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('view_judgement',$data);
+        $this->load->view('includes/footer');
+        
+    }
+     public function edit_judgment(){
+
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+
+        $this->load->helper('form');
+        $this->load->helper('url');
+
+        $this->load->model('Clerk_model');
+        $this->load->model('Admin_model');
+
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+
+        $data['judgement'] = $this->similarity();
+       
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('edit_judgement',$data);
+        $this->load->view('includes/footer');
+        
+    }
+    public function update_judgement(){
+        $case_num = $_REQUEST['case_num'];
+
+        $this->load->model('Judge_model');
+        $query = $this->Judge_model->update_judgement($case_num);
+        
+        if ($query == true){
+            $this->session->set_flashdata('success', 'Case Record updated Successfully');
+            redirect('judge_controller/view_cases', 'refresh');
+        } else {
+            $this->session->set_flashdata('error', 'Case Record Not Added');
+            redirect('clerk_controller/edit_case_view', 'refresh');
+        }
+
+        
+    }
+
     public function similarity()
     {
-        $plaintiffs = $_REQUEST['plaintiffs'];
-        $defendants = $_REQUEST['defendants'];
         $case_num = $_REQUEST['case_num'];
 
         $this->load->model('Clerk_model');
         $this->load->model('Admin_model');
         $this->load->model('Judge_model');
 
-        $case_details = $this->Clerk_model->get_case_info($case_num);
+        $case_info = $this->Clerk_model->get_case_info($case_num);
+        foreach ($case_info->result() as $row) {
+            $case_details = $row->case_details;
 
-
+            }
         if(empty($case_details) || (strlen($case_details)<30))
         {
             //question is empty or length of characters less than 15
@@ -73,7 +135,7 @@ class Judge_controller extends CI_Controller
 
             //pre process question
             $case_details=pre_process_case_details($case_details);
-            $case_match = $this->Judge_model->get_case_judgement($case_details);
+            $case_match = $this->Judge_model->get_judgement($case_num);
 
             //get exact match
             if($case_match !==-1)
@@ -93,12 +155,13 @@ class Judge_controller extends CI_Controller
                 else
                 {
                     //answer not present, thus get next best match
-                    $case_best_match=$this->Judge_model->get_best_case_match($case_details);
-                    if($case_best_match!=-1)
+                    $new_case_num=$this->Judge_model->get_best_case_match($case_details);
+                    echo $new_case_num;
+                    if($new_case_num!=-1)
                     {
                         //suitable best match found
                         //get answer of best match
-                        $judgement=$this->Judge_model->get_judgement($case_num);
+                        $judgement=$this->Judge_model->get_best_judgement($case_best_match);
                         if($judgement!=-1)
                         {
                             //answer present
@@ -177,7 +240,7 @@ class Judge_controller extends CI_Controller
 
         }
 
-        echo(json_encode($return_array));
+       return $return_array;
 
 
     }

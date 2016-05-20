@@ -7,11 +7,32 @@ class Clerk_model extends CI_Model
         return $query;
 
 	}
+	public function get_judicial_officers_per_id($judicial_officer_id){
+		$this->db->where('judicial_officer_id', $judicial_officer_id);
+
+		$query=$this->db->get('judicial_officers');
+        return $query->row()->judicial_officer_name;
+
+	}
 
 	public function get_legalrep(){
 
 		$query=$this->db->get('legalrep');
         return $query;
+
+	}
+	public function get_courts(){
+
+		$query=$this->db->get('court_names');
+        return $query;
+
+	}
+
+	public function get_legalrep_per_id($legalrep_id){
+		$this->db->where('legalrep_id', $legalrep_id);
+
+		$query=$this->db->get('legalrep');
+        return $query->row()->legalrep_name;
 
 	}
 
@@ -62,15 +83,14 @@ class Clerk_model extends CI_Model
 
 		$new_case_details = array(
             'court_id' => $court_id,
-            'case_num' => $this->input->post('case_code') . "/". $this->input->post('case_number'),
+            'case_num' => $this->input->post('case_code') . "/". $this->input->post('case_number'). "/2015",
             'case_type' => $this->input->post('case_type'),
             'date_filed' => $this->input->post('date_filed'),
-            'judicial_officer_id' => $this->input->post('judicial_officer_id'),
+            'judicial_officer_id' => $this->input->post('judicial_officers'),
             'plaintiffs' => $this->input->post('plaintiffs'),
             'defendants' =>$this->input->post('defendants'),
-            'legalrep_id' => $this->input->post('legalrep_id'),
+            'legalrep_id' => $this->input->post('legalrep'),
             'origcasenum_appeal' => $this->input->post('origcasenum_appeal'),
-            'origcourt_appeal' => $this->input->post('origcourt_appeal')
 
             );
         $query = $this->db->insert('case_details', $new_case_details);
@@ -81,10 +101,9 @@ class Clerk_model extends CI_Model
 	function add_case_info(){
 
 		$new_case_info = array(
-			'case_num' => $this->input->post('case_code') ."/". $this->input->post('case_number'),
+			'case_num' => $this->input->post('case_code') ."/". $this->input->post('case_number'). "/2015",
 			'case_details' => $this->input->post('case_details'),
-			'evidence' => $this->input->post('evidence'),
-			'witnesses' => $this->input->post('witnesses'),  
+			'evidence' => $this->input->post('evidence'), 
 			);
 
 		$query = $this->db->insert('case_information', $new_case_info);
@@ -92,6 +111,14 @@ class Clerk_model extends CI_Model
 	}
 
 	public function get_all_case_details(){
+
+		$query=$this->db->get('case_details');
+		return $query;
+
+	}
+
+	public function get_case_details_per_case_num($case_num){
+		$this->db->where('case_num', $case_num);
 
 		$query=$this->db->get('case_details');
 		return $query;
@@ -128,8 +155,27 @@ class Clerk_model extends CI_Model
 	}
 	
 	public function update_case($case_num){
+		$data = array(
+			'court_id' => $this->input->post('court_name') ,
+			'plaintiffs' => $this->input->post('plaintiffs'),
+			'defendants' =>$this->input->post('defendants'),
+			'origcasenum_appeal' => $this->input->post('origcasenum_appeal'),
+			);
+		 $this->db->where('case_num', $case_num);
 
-		
+		$query = $this->db->update('case_details', $data);
+        return $query;
+	}
+	public function update_case_info($case_num){
+		$data = array(
+			'case_details' => $this->input->post('case_grounds'),
+			'evidence' => $this->input->post('evidence'), 
+			);
+		$this->db->where('case_num', $case_num);
+
+
+		$query = $this->db->update('case_information', $data);
+        return $query;
 	}
 
 }
