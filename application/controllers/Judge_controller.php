@@ -176,7 +176,8 @@ class Judge_controller extends CI_Controller
                             //answer not present, thus give error // todo mark question as un answered
                             $return_array=array(
                                 "status"=>"error",
-                                "payload"=>"best match was found but had no answer."
+                                "payload"=>"best match was found but had no answer.",
+                                "answer"=>$judgement
 
                             );
                         }
@@ -218,7 +219,8 @@ class Judge_controller extends CI_Controller
                         //answer not present, thus give error // todo mark question as un answered
                         $return_array=array(
                             "status"=>"error",
-                            "payload"=>"best match was found but had no answer."
+                            "payload"=>"best match was found but had no answer.",
+                             "answer"=>$case_best_match
 
                         );
                     }

@@ -93,13 +93,15 @@ class Judge_model extends CI_Model
 
                 $res_case_details=pre_process_case_details($res_case_details);
                 $temp_similarity=get_similarity($case_details,$res_case_details);
-                //similar_text($case_details,$res_case_details,$percentage);
+                similar_text($case_details,$res_case_details,$percentage);
                 //$temp_similarity=$temp_similarity+($percentage/100);
                 if(($temp_similarity>$similarity)&&($temp_similarity<1.0))
                 {
                     $similarity=$temp_similarity;
+                    
                     $case_num=$res_case_num;
                 }
+                
                 
             }
 
@@ -107,8 +109,12 @@ class Judge_model extends CI_Model
             {
                 //return question_id
                 //todo add question to new questions with suggested answers
-              
-                return $case_num;
+            echo($similarity);
+            echo($case_num);
+             $best_judgement=$this->get_judgement($case_num);
+            
+
+                return $best_judgement;
             }
             else
             {
@@ -117,10 +123,7 @@ class Judge_model extends CI_Model
             }
 
         }
-        else
-        {
-            return -1;
-        }
+    
 
 	}
 	

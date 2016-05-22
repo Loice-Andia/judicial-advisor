@@ -82,7 +82,7 @@
 									echo $judgement["answer"];
 								}
 								else{
-									echo $judgement["payload"];
+									echo $judgement["answer"];
 								}
 								?>
 								</p>
