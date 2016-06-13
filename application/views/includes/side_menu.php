@@ -60,12 +60,12 @@
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Add a New Case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/judge_controller/view_cases"."><i class='icon-pencil3'></i> <span>View Recent Cases</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/judge_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
 								} elseif ($this->session->userdata('role_id') == '1') {
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case"."><i class='icon-pencil3'></i> <span>Search a case</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/judge_controller/view_cases"."><i class='icon-pencil3'></i> <span>View recent Cases</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/search_case><i class='icon-pencil3'></i> <span>Edit a Case</span></a></li>";
-									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
+									echo "<li class=''><a href=".base_url()."index.php/judge_controller/reports"."><i class='icon-copy'></i> <span>View Reports</span></a></li>";
 								} else {
 									echo "<li class=''><a href=".base_url()."index.php/admin_controller/view_users"."><i class='icon-pencil3'></i> <span>Users</span></a></li>";
 									echo "<li class=''><a href=".base_url()."index.php/clerk_controller/add_case_view"."><i class='icon-pencil3'></i> <span>Courts</span></a></li>";

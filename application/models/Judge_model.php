@@ -17,6 +17,24 @@ class Judge_model extends CI_Model
         }
 
 	}
+  public function get_indicators(){
+    $query=$this->db->get('indicators');
+        return $query;
+  }
+   public function get_all_judgements(){
+    $query=$this->db->get('judgements');
+        return $query->num_rows();
+  }
+
+
+  public function average_time(){
+    $this->db->where('user_id', $user_id);
+        $this->db->from('users');
+        $this->db->join('role','users.role_id=role.role_id');
+        $query=$this->db->get();
+
+        return $query;
+  }
 
 	public function get_case_judgement($case_details){
 
@@ -54,7 +72,7 @@ class Judge_model extends CI_Model
 	}
 
   public function get_best_judgement($case_best_match){
-    echo($case_best_match);
+    
 
     $this->db->where('case_num',$case_best_match);
     $query = $this->db->get('judgements');

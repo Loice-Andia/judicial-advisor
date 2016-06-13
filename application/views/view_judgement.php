@@ -82,6 +82,7 @@
 									echo $judgement["answer"];
 								}
 								else{
+									echo "<h6><strong><center>".$judgement["payload"]."</center></strong></h6>";
 									echo $judgement["answer"];
 								}
 								?>

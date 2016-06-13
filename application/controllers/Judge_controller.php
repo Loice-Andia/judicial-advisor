@@ -46,6 +46,34 @@ class Judge_controller extends CI_Controller
         $this->load->view('includes/footer');
 		
 	}
+    
+
+    public function reports(){
+        $court_id = $this->session->userdata('court_id');
+        $role_id = $this->session->userdata('role_id');
+
+        $this->load->helper('form');
+        $this->load->helper('url');
+
+        $this->load->model('Clerk_model');
+        $this->load->model('Admin_model');
+        $this->load->model('Judge_model');
+        $filedcases=$this->Clerk_model->get_all_case_details();
+
+        $data['court_name'] = $this->Clerk_model->get_court_per_id($court_id);
+        $data['role'] = $this->Admin_model->get_user_role($role_id);
+        $data['indicators'] = $this->Judge_model->get_indicators();
+        $data['no_closed'] = $this->Judge_model->get_all_judgements();
+        $data['filedcases'] = $filedcases->num_rows();
+       
+       
+        $this->load->view('includes/header',$data);
+
+        $this->load->view('includes/side_menu',$data);
+        $this->load->view('judgereports',$data);
+        $this->load->view('includes/footer');
+
+    }
     public function view_judgment(){
 
         $court_id = $this->session->userdata('court_id');
@@ -211,7 +239,7 @@ class Judge_controller extends CI_Controller
                         $return_array=array(
                             "status"=>"ok",
                             "payload"=>"best match was found.",
-                            "answer"=>$judgement
+                            "answer"=>$case_best_match
                         );
                     }
                     else
@@ -219,7 +247,7 @@ class Judge_controller extends CI_Controller
                         //answer not present, thus give error // todo mark question as un answered
                         $return_array=array(
                             "status"=>"error",
-                            "payload"=>"best match was found but had no answer.",
+                            "payload"=>"Case Status:<strong>PENDING</strong>.</br> BEST MATCH(proposed judgment)->",
                              "answer"=>$case_best_match
 
                         );
